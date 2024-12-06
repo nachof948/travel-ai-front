@@ -88,16 +88,18 @@ export const translations = {
       }
     },
     signin: {
+      title: "Inicia sesión en tu cuenta",
+      subtitle: "Ingresa tus credenciales para continuar",
       form: {
-        email: 'Correo electrónico',
-        password: 'Contraseña',
-        submit: 'Iniciar sesión',
-        submitting: 'Iniciando sesión...',
-        noAccount: '¿No tienes una cuenta?',
-        signUp: 'Regístrate',
+        email: "Correo electrónico",
+        password: "Contraseña",
+        submit: "Iniciar sesión",
+        submitting: "Iniciando sesión...",
+        noAccount: "¿No tienes una cuenta?",
+        signUp: "Regístrate",
         errors: {
-          invalidEmail: 'Correo electrónico inválido',
-          passwordMin: 'La contraseña debe tener al menos 8 caracteres'
+          invalidEmail: "Correo electrónico inválido",
+          passwordMin: "La contraseña debe tener al menos 8 caracteres"
         }
       }
     }
@@ -191,16 +193,18 @@ export const translations = {
       }
     },
     signin: {
+      title: "Sign in to your account",
+      subtitle: "Enter your credentials to continue",
       form: {
-        email: 'Email',
-        password: 'Password',
-        submit: 'Sign in',
-        submitting: 'Signing in...',
-        noAccount: 'Don\'t have an account?',
-        signUp: 'Sign up',
+        email: "Email address",
+        password: "Password",
+        submit: "Sign in",
+        submitting: "Signing in...",
+        noAccount: "Don't have an account?",
+        signUp: "Sign up",
         errors: {
-          invalidEmail: 'Invalid email',
-          passwordMin: 'The password must have at least 8 characters'
+          invalidEmail: "Invalid email address",
+          passwordMin: "Password must be at least 8 characters"
         }
       }
     }
