@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '@/store/hooks';
 import HomePage from './pages/HomePage';
 import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
 import ThemeToggle from './components/shared/ThemeToggle';
 import LanguageToggle from './components/shared/LanguageToggle';
 
@@ -25,6 +26,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/signin" element={<SignIn />} />
         </Routes>
       </main>
     </Router>

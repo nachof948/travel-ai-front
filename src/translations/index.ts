@@ -75,21 +75,29 @@ export const translations = {
         confirmPassword: 'Confirmar contraseña',
         submit: 'Registrarse',
         submitting: 'Registrando...',
+        haveAccount: '¿Ya tienes una cuenta?',
+        signIn: 'Inicia sesión',
         errors: {
-          required: 'Este campo es requerido',
-          invalidEmail: 'Correo electrónico inválido',
-          passwordMismatch: 'Las contraseñas no coinciden',
-          passwordRequirements: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial',
           nameMin: 'El nombre debe tener al menos 3 caracteres',
-          nameMax: 'El nombre no puede exceder los 50 caracteres',
+          nameMax: 'El nombre no puede tener más de 50 caracteres',
+          invalidEmail: 'Correo electrónico inválido',
+          passwordMin: 'La contraseña debe tener al menos 8 caracteres',
+          passwordRequirements: 'La contraseña debe contener al menos una mayúscula, una minúscula, un número y un carácter especial',
+          passwordMismatch: 'Las contraseñas no coinciden'
+        }
+      }
+    },
+    signin: {
+      form: {
+        email: 'Correo electrónico',
+        password: 'Contraseña',
+        submit: 'Iniciar sesión',
+        submitting: 'Iniciando sesión...',
+        noAccount: '¿No tienes una cuenta?',
+        signUp: 'Regístrate',
+        errors: {
+          invalidEmail: 'Correo electrónico inválido',
           passwordMin: 'La contraseña debe tener al menos 8 caracteres'
-        },
-        validations: {
-          minLength: 'Al menos 8 caracteres',
-          upperCase: 'Al menos una mayúscula',
-          lowerCase: 'Al menos una minúscula',
-          number: 'Al menos un número',
-          specialChar: 'Al menos un carácter especial (@$!%*?&)'
         }
       }
     }
@@ -170,21 +178,29 @@ export const translations = {
         confirmPassword: 'Confirm password',
         submit: 'Sign up',
         submitting: 'Signing up...',
+        haveAccount: 'Already have an account?',
+        signIn: 'Sign in',
         errors: {
-          required: 'This field is required',
-          invalidEmail: 'Invalid email',
-          passwordMismatch: 'Passwords do not match',
-          passwordRequirements: 'Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character',
           nameMin: 'The name must have at least 3 characters',
           nameMax: 'The name cannot exceed 50 characters',
+          invalidEmail: 'Invalid email',
+          passwordMin: 'The password must have at least 8 characters',
+          passwordRequirements: 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character',
+          passwordMismatch: 'Passwords do not match'
+        }
+      }
+    },
+    signin: {
+      form: {
+        email: 'Email',
+        password: 'Password',
+        submit: 'Sign in',
+        submitting: 'Signing in...',
+        noAccount: 'Don\'t have an account?',
+        signUp: 'Sign up',
+        errors: {
+          invalidEmail: 'Invalid email',
           passwordMin: 'The password must have at least 8 characters'
-        },
-        validations: {
-          minLength: 'At least 8 characters',
-          upperCase: 'At least one uppercase letter',
-          lowerCase: 'At least one lowercase letter',
-          number: 'At least one number',
-          specialChar: 'At least one special character (@$!%*?&)'
         }
       }
     }
