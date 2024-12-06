@@ -10,7 +10,8 @@ const Hero: React.FC = () => {
   const t = translations[currentLanguage].hero;
 
   const handleStartAdventure = () => {
-    navigate('/signup');
+    /* navigate('/signup'); */
+    navigate('/travel-selection');
   };
 
   return (

@@ -6,6 +6,7 @@ import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import ThemeToggle from './components/shared/ThemeToggle';
 import LanguageToggle from './components/shared/LanguageToggle';
+import TravelSelectionPage from '@/pages/TravelSelectionPage';
 
 const App: React.FC = () => {
   const isDarkMode = useAppSelector((state) => state.theme.isDarkMode);
@@ -27,6 +28,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/travel-selection" element={<TravelSelectionPage />} />
         </Routes>
       </main>
     </Router>

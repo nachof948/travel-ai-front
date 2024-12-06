@@ -104,6 +104,13 @@ export const translations = {
           passwordMin: "La contraseña debe tener al menos 8 caracteres"
         }
       }
+    },
+    travelSelection: {
+      title: "¿A dónde quieres viajar?",
+      selectCountry: "Selecciona un país",
+      selectCity: "Selecciona una ciudad",
+      countryPlaceholder: "Buscar país...",
+      cityPlaceholder: "Buscar ciudad..."
     }
   },
   en: {
@@ -211,6 +218,13 @@ export const translations = {
           passwordMin: "Password must be at least 8 characters"
         }
       }
+    },
+    travelSelection: {
+      title: "Where do you want to travel?",
+      selectCountry: "Select a country",
+      selectCity: "Select a city",
+      countryPlaceholder: "Search country...",
+      cityPlaceholder: "Search city..."
     }
   }
 }; 
