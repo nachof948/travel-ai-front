@@ -43,3 +43,57 @@
   background-size: 200% 200%;
   animation: gradient 3s linear infinite;
 } 
+
+/* Estilos base para la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 8px; /* Más delgada */
+  height: 8px;
+}
+
+/* Ocultar las flechas */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Track (fondo) de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Fondo más oscuro */
+  border-radius: 50px; /* Más redondeado */
+}
+
+/* Handle (barra) de desplazamiento */
+::-webkit-scrollbar-thumb {
+  background: #9333ea;
+  border-radius: 20px; /* Más redondeado */
+  border: 2px solid #1a1a1a;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover sobre el handle */
+::-webkit-scrollbar-thumb:hover {
+  background: #7e22ce;
+}
+
+/* Estilos para modo oscuro */
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a; /* Fondo aún más oscuro en modo oscuro */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #9333ea;
+  border-color: #0f172a;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #7e22ce;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9333ea #1a1a1a;
+}
+
+.dark * {
+  scrollbar-color: #9333ea #0f172a;
+}

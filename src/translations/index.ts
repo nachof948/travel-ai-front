@@ -68,6 +68,7 @@ export const translations = {
     signup: {
       title: 'Crea tu cuenta',
       subtitle: 'Comienza tu viaje con nosotros',
+      backToHome: "Volver al inicio",
       form: {
         fullName: 'Nombre completo',
         email: 'Correo electrónico',
@@ -90,6 +91,7 @@ export const translations = {
     signin: {
       title: "Inicia sesión en tu cuenta",
       subtitle: "Ingresa tus credenciales para continuar",
+      backToHome: "Volver al inicio",
       form: {
         email: "Correo electrónico",
         password: "Contraseña",
@@ -173,6 +175,7 @@ export const translations = {
     signup: {
       title: 'Create your account',
       subtitle: 'Start your journey with us',
+      backToHome: "Back to home",
       form: {
         fullName: 'Full name',
         email: 'Email',
@@ -195,6 +198,7 @@ export const translations = {
     signin: {
       title: "Sign in to your account",
       subtitle: "Enter your credentials to continue",
+      backToHome: "Back to home",
       form: {
         email: "Email address",
         password: "Password",

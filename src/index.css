@@ -66,3 +66,52 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* Estilos base para la barra de desplazamiento */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track (fondo) de la barra de desplazamiento */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* Handle (barra) de desplazamiento */
+::-webkit-scrollbar-thumb {
+  background: #9333ea; /* Color morado que coincide con el tema */
+  border-radius: 10px;
+  border: 2px solid #f1f1f1;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover sobre el handle */
+::-webkit-scrollbar-thumb:hover {
+  background: #7e22ce;
+}
+
+/* Estilos para modo oscuro */
+.dark ::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #9333ea;
+  border-color: #1f2937;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #7e22ce;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #9333ea #f1f1f1;
+}
+
+.dark * {
+  scrollbar-color: #9333ea #1f2937;
+}
