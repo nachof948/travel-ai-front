@@ -1,17 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useAppSelector } from '@/store/hooks';
 import { translations } from '@/translations';
 import PasswordValidation from './PasswordValidation';
-import { FormData, PasswordValidations } from '@/interfaces/signup.interface';
+import { SignUpFormData, PasswordValidations, InputFieldProps } from '@/interfaces/signup.interface';
+
+// Separar el schema de validación
+const createSignUpSchema = (t: any) => z.object({
+  fullName: z.string()
+    .min(3, t.errors.nameMin)
+    .max(50, t.errors.nameMax),
+  email: z.string()
+    .email(t.errors.invalidEmail),
+  password: z.string()
+    .min(8, t.errors.passwordMin)
+    .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 
+      t.errors.passwordRequirements),
+  confirmPassword: z.string()
+}).refine((data) => data.password === data.confirmPassword, {
+  message: t.errors.passwordMismatch,
+  path: ["confirmPassword"],
+});
+
+// Componente para el campo de entrada reutilizable
+const InputField: React.FC<InputFieldProps> = ({ 
+  id, 
+  label, 
+  type, 
+  register, 
+  error, 
+  onChange 
+}) => (
+  <div>
+    <label htmlFor={id} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+      {label}
+    </label>
+    <input
+      {...register}
+      type={type}
+      id={id}
+      onChange={onChange}
+      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+    />
+    {error && (
+      <p className="mt-1 text-sm text-red-600 dark:text-red-400">{error.message}</p>
+    )}
+  </div>
+);
 
 const SignUpForm: React.FC = () => {
   const currentLanguage = useAppSelector((state) => state.language.currentLanguage);
   const t = translations[currentLanguage].signup.form;
   
-  const [passwordValidations, setPasswordValidations] = useState<PasswordValidations>({
+  const [passwordValidations, setPasswordValidations] = React.useState<PasswordValidations>({
     minLength: false,
     hasUpperCase: false,
     hasLowerCase: false,
@@ -19,29 +62,15 @@ const SignUpForm: React.FC = () => {
     hasSpecialChar: false,
   });
 
-  const signUpSchema = z.object({
-    fullName: z.string()
-      .min(3, t.errors.nameMin)
-      .max(50, t.errors.nameMax),
-    email: z.string()
-      .email(t.errors.invalidEmail),
-    password: z.string()
-      .min(8, t.errors.passwordMin)
-      .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 
-        t.errors.passwordRequirements),
-    confirmPassword: z.string()
-  }).refine((data) => data.password === data.confirmPassword, {
-    message: t.errors.passwordMismatch,
-    path: ["confirmPassword"],
-  });
+  const [showValidations, setShowValidations] = React.useState(false);
 
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({
-    resolver: zodResolver(signUpSchema),
+  } = useForm<SignUpFormData>({
+    resolver: zodResolver(createSignUpSchema(t)),
     mode: 'onChange'
   });
 
@@ -51,7 +80,8 @@ const SignUpForm: React.FC = () => {
     defaultValue: ''
   });
 
-  useEffect(() => {
+  // Mover la lógica de validación a una función separada
+  const updatePasswordValidations = React.useCallback((password: string) => {
     setPasswordValidations({
       minLength: password.length >= 8,
       hasUpperCase: /[A-Z]/.test(password),
@@ -59,67 +89,65 @@ const SignUpForm: React.FC = () => {
       hasNumber: /\d/.test(password),
       hasSpecialChar: /[@$!%*?&]/.test(password),
     });
-  }, [password]);
+  }, []);
 
-  const onSubmit = async (data: FormData) => {
+  React.useEffect(() => {
+    updatePasswordValidations(password);
+  }, [password, updatePasswordValidations]);
+
+  const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log(data);
       // Aquí iría la lógica de registro
+      console.log(data);
     } catch (error) {
-      console.error(error);
+      console.error('Error en el registro:', error);
+    }
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    register('password').onChange(e);
+    const value = e.target.value;
+    if (value.length > 0 && !showValidations) {
+      setShowValidations(true);
+    } else if (value.length === 0) {
+      setShowValidations(false);
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
       <div className="space-y-4">
-        <div>
-          <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            {t.fullName}
-          </label>
-          <input
-            {...register('fullName')}
-            type="text"
-            id="fullName"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-          />
-          {errors.fullName && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.fullName.message}</p>
-          )}
-        </div>
+        <InputField
+          id="fullName"
+          label={t.fullName}
+          type="text"
+          register={register('fullName')}
+          error={errors.fullName}
+        />
+
+        <InputField
+          id="email"
+          label={t.email}
+          type="email"
+          register={register('email')}
+          error={errors.email}
+        />
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            {t.email}
-          </label>
-          <input
-            {...register('email')}
-            type="email"
-            id="email"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
-          />
-          {errors.email && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div>
-          <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-            {t.password}
-          </label>
-          <input
-            {...register('password')}
-            type="password"
+          <InputField
             id="password"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+            label={t.password}
+            type="password"
+            register={register('password')}
+            error={errors.password}
+            onChange={handlePasswordChange}
           />
-          <PasswordValidation 
-            password={password}
-            validations={passwordValidations}
-            t={t}
-          />
-          {errors.password && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.password.message}</p>
+          {showValidations && (
+            <PasswordValidation 
+              password={password}
+              validations={passwordValidations}
+              t={t}
+            />
           )}
         </div>
 

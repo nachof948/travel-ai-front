@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-export interface FormData {
+export interface SignUpFormData {
   fullName: string;
   email: string;
   password: string;
@@ -15,21 +15,11 @@ export interface PasswordValidations {
   hasSpecialChar: boolean;
 }
 
-export interface PasswordValidationProps {
-  password: string;
-  validations: PasswordValidations;
-  t: {
-    validations: {
-      minLength: string;
-      upperCase: string;
-      lowerCase: string;
-      number: string;
-      specialChar: string;
-    };
-  };
-}
-
-export interface ValidationItemProps {
-  isValid: boolean;
-  text: string;
+export interface InputFieldProps {
+  id: string;
+  label: string;
+  type: string;
+  register: any;
+  error?: any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 } 
